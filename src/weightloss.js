@@ -1,4 +1,5 @@
 const weightloss = (() => {
+  const CALORIES_PER_POUND = 3500;
   /* Calculate bmr with Mifflin St. Jeor equation */
   const calculateBMR = (user) => {
     let bmr;
@@ -19,6 +20,7 @@ const weightloss = (() => {
   
   return {
     calculateBMR,
+    CALORIES_PER_POUND,
   }
 })();
 

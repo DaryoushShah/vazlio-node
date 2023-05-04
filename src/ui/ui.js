@@ -1,17 +1,16 @@
 import data from '../data.js';
 import user from '../user.js';
-import userSetup from './usersetup.js'
+import userSetup from './usersetup.js';
+import mainMenu from './mainmenu.js';
 
 const ui = (() => {
 
   /* onStart() */
   const onStart = () => {
-    console.clear();
-    if(!user.check()){
+    if(user.check(user.info) == false){
       userSetup();
-      //TODO: main menu
     }else{
-      //TODO: main menu
+      mainMenu();
     }
   }
 

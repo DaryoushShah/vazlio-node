@@ -2,6 +2,7 @@ import inquirer from "inquirer";
 import data from '../data.js';
 import user from '../user.js'
 import weightloss from '../weightloss.js';
+import mainMenu from "./mainmenu.js";
 
 const userSetup = () => {
   /* Check if user data is NULL */
@@ -24,7 +25,7 @@ const userSetup = () => {
     },
     {
       name: 'weight',
-      message: 'What is your height in pounds',
+      message: 'What is your weight in pounds',
       type: 'number',
     },
     {
@@ -64,8 +65,8 @@ const userSetup = () => {
 
     /* Save to file */
     data.save('data/user.json', user.info);
-    
-
+    console.clear();
+    mainMenu();
   });
 }
 

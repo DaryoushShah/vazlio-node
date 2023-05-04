@@ -3,7 +3,7 @@ import fs from 'fs';
 const data = (() => {
   const load = (filepath, data) => {
     try {
-      data = JSON.parse(fs.readFileSync(filepath))
+      return JSON.parse(fs.readFileSync(filepath))
     } catch (err) {
       console.log(err);
     }

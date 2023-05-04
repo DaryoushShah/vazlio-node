@@ -11,11 +11,13 @@ if(!data.check('data/user.json')){
   data.createFile('data/user.json');
   data.save('data/user.json', user.info)
 }else {
-  data.load('data/user.json', user.info);
+  user.info = data.load('data/user.json');
 }
 
+/* Register save before close */
+process.on('exit', () => {
+  data.save('data/user.json', user.info);
+});
+
+console.clear();
 ui.onStart();
-
-
-
-/* Check if file is empty */

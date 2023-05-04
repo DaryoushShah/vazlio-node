@@ -8,20 +8,20 @@ const user = (() => {
     bmr: null,
     isOnRisperidone: null,
     goalWeight: null,
-    eatingSchedule: [],
-    exerciseSchedule: [],
+    eatingSchedule: [0, 0, 0, 0, 0, 0, 0],
+    exerciseSchedule: [0, 0, 0, 0, 0, 0, 0],
   }
 
-  const check = () => {
+  const check = (obj) => {
     if(
-      info.name == null ||
-      info.birthday == null ||
-      info.height == null ||
-      info.weight == null ||
-      info.sex == null ||
-      info.bmr == null ||
-      info.isOnRisperidone == null ||
-      info.goalWeight == null
+      obj.name === null ||
+      obj.birthday === null ||
+      obj.height === null ||
+      obj.weight === null ||
+      obj.sex === null ||
+      obj.bmr === null ||
+      obj.isOnRisperidone == null ||
+      obj.goalWeight == null
     ){
       return false;
     }else {
