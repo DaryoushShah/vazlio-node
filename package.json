@@ -1,0 +1,26 @@
+{
+  "name": "vazlio-node",
+  "version": "0.5.0",
+  "description": "A lightweight version of Vazlio for Node.js!",
+  "main": "vazlio.js",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node vazlio.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/DaryoushShah/vazlio-node.git"
+  },
+  "author": "Daryoush Ghoreishi",
+  "license": "UNLICENSED",
+  "bugs": {
+    "url": "https://github.com/DaryoushShah/vazlio-node/issues"
+  },
+  "homepage": "https://github.com/DaryoushShah/vazlio-node#readme",
+  "dependencies": {
+    "chalk": "^5.2.0",
+    "inquirer": "^9.2.0"
+  }
+}
