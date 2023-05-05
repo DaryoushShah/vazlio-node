@@ -5,7 +5,7 @@ import mainMenu from './mainmenu.js';
 
 const setupEatingSchedule = () => {
   /* Check if user data is NULL */
-  console.log(`You burn around ${user.info.bmr} calories per day weighing ${user.weight}`);
+  console.log(`You burn around ${user.info.bmr} calories per day weighing ${user.info.weight}`);
   inquirer
   .prompt([
     {

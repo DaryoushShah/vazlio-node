@@ -1,6 +1,6 @@
 {
   "name": "vazlio-node",
-  "version": "0.9.0",
+  "version": "1.0.0",
   "description": "A lightweight version of Vazlio for Node.js!",
   "main": "vazlio.js",
   "private": true,

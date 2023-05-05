@@ -20,7 +20,7 @@ const updateWeight = () => {
     user.info.weight = Number(answers.updateWeight);
 
     /* Calculate BMR */
-    user.info.bmr = weightloss.calculateBMR(user);
+    user.info.bmr = weightloss.calculateBMR(user, user.info.weight);
 
     /* Save to file */
     data.save('data/user.json', user.info);

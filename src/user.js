@@ -32,16 +32,28 @@ const user = (() => {
   const calculateDetailedAge = () => {
     const oneYear = 1000 * 60 * 60 * 24 * 365;
     const birthdayDate = new Date(user.info.birthday);
-    const currentDate = new Date();
+    let currentDate = new Date();
+    currentDate.setDate(currentDate.getDate());
 
     const differenceInTime = currentDate.getTime() - birthdayDate.getTime();
     return differenceInTime / oneYear;
   };
 
+  const calculateDetailedProjectedAge = (days) => {
+    const oneYear = 1000 * 60 * 60 * 24 * 365;
+    const birthdayDate = new Date(user.info.birthday);
+    const projectedDate = new Date();
+    projectedDate.setDate(projectedDate.getDate() + days);
+
+    const differenceInTime = projectedDate.getTime() - birthdayDate.getTime();
+    return differenceInTime / oneYear;
+  }
+
   return {
     info,
     check,
     calculateDetailedAge,
+    calculateDetailedProjectedAge,
   }
 })();
 
