@@ -27,7 +27,12 @@ const projection = () => {
     let weightLostPerWeek = []
     let projectedWeight = user.info.weight;
     let projectedBMR = user.info.bmr;
+    let planWorks = true;
     while (projectedWeight > user.info.goalWeight) {
+      if(daysPassed > 3650){
+        planWorks = false;
+        break;
+      }
       let weightLostInWeek = 0;
       for(let i = 0; i < user.info.eatingSchedule.length; i++) {
         if(projectedWeight <= user.info.goalWeight){
@@ -39,25 +44,29 @@ const projection = () => {
             console.log(`Day ${daysPassed}: You expended ${projectedBMR} calories and consumed ${user.info.eatingSchedule[i]} calories resulting in ${totalCalorieDiff/weightloss.CALORIES_PER_POUND} lbs lost`)
           }
           projectedWeight -= totalCalorieDiff/weightloss.CALORIES_PER_POUND;
-          projectedBMR = weightloss.calculateBMR(user);
+          projectedBMR = weightloss.calculateBMR(user, projectedWeight);
           daysPassed++;
         }
       }
       weightLostPerWeek.push(weightLostInWeek);
     }
-    
-    let averageWeeklyWeightLoss = 0;
-    for(let i = 0; i < weightLostPerWeek.length; i++){
-      averageWeeklyWeightLoss += weightLostPerWeek[i]
+
+    if(!planWorks){
+      console.log(chalk.red('Your weightloss plan results in weight being gained'));
+    }else{
+      let averageWeeklyWeightLoss = 0;
+      for(let i = 0; i < weightLostPerWeek.length; i++){
+        averageWeeklyWeightLoss += weightLostPerWeek[i]
+      }
+      averageWeeklyWeightLoss /= weightLostPerWeek.length
+      
+      
+      let date = new Date();
+      date.setDate(date.getDate() + daysPassed);
+      
+      console.log(chalk.red(`will lose around ${averageWeeklyWeightLoss} lbs per week`))
+      console.log(chalk.red(`You will reach ${user.info.goalWeight} lbs by ${date.toLocaleDateString()}`));
     }
-    averageWeeklyWeightLoss /= weightLostPerWeek.length
-    
-    
-    let date = new Date();
-    date.setDate(date.getDate() + daysPassed);
-    
-    console.log(chalk.red(`will lose around ${averageWeeklyWeightLoss} lbs per week`))
-    console.log(chalk.red(`You will reach ${user.info.goalWeight} lbs by ${date.toLocaleDateString()}`));
   })
 }
 

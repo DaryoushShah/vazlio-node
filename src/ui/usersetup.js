@@ -61,7 +61,7 @@ const userSetup = () => {
     }
 
     /* Calculate BMR */
-    user.info.bmr = weightloss.calculateBMR(user);
+    user.info.bmr = weightloss.calculateBMR(user, user.info.weight);
 
     /* Save to file */
     data.save('data/user.json', user.info);
