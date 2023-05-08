@@ -4,8 +4,6 @@ import weightloss from '../weightloss.js';
 import chalk from 'chalk';
 
 /* UI's */
-
-
 const projection = () => {
   let verbose = false; 
   inquirer
@@ -26,7 +24,7 @@ const projection = () => {
     let daysPassed = 0;
     let weightLostPerWeek = []
     let projectedWeight = user.info.weight;
-    let projectedBMR = user.info.bmr;
+    let projectedBMR = weightloss.calculateBMR(user, user.info.weight);
     let planWorks = true;
     while (projectedWeight > user.info.goalWeight) {
       if(daysPassed > 3650){
@@ -41,14 +39,16 @@ const projection = () => {
           let totalCalorieDiff = projectedBMR + user.info.exerciseSchedule[i] - user.info.eatingSchedule[i];
           weightLostInWeek += totalCalorieDiff/weightloss.CALORIES_PER_POUND;
           if(verbose == true){
+            const projectedDate = new Date();
+            projectedDate.setDate(projectedDate.getDate() + daysPassed);
             let totalCaloriesExpended = projectedBMR + user.info.exerciseSchedule[i];
             let weightLost = totalCalorieDiff/weightloss.CALORIES_PER_POUND;
             if(weightLost > 0) {
-              console.log(`Day ${daysPassed}: You expended ` + chalk.cyanBright(`${totalCaloriesExpended} calories`) + ' and consumed ' + chalk.redBright(`${user.info.eatingSchedule[i]} calories`) + ` resulting in ${weightLost} lbs lost`);
+              console.log(chalk.yellow(`${projectedDate.toLocaleDateString()}: `) + 'You expended ' + chalk.cyanBright(`${totalCaloriesExpended} calories`) + ' and consumed ' + chalk.redBright(`${user.info.eatingSchedule[i]} calories`) + ` resulting in ${weightLost} lbs lost`);
             }else if(weightLost < 0){
-              console.log(`Day ${daysPassed}: You expended ` + chalk.cyanBright(`${totalCaloriesExpended} calories`) + ' and consumed ' + chalk.redBright(`${user.info.eatingSchedule[i]} calories`) + ` resulting in ${weightLost * -1} lbs gained`);
+              console.log(chalk.yellow(`${projectedDate.toLocaleDateString()}: `) + 'You expended ' + chalk.cyanBright(`${totalCaloriesExpended} calories`) + ' and consumed ' + chalk.redBright(`${user.info.eatingSchedule[i]} calories`) + ` resulting in ${weightLost * -1} lbs gained`);
             }else{
-              console.log(`Day ${daysPassed}: You expended ` + chalk.cyanBright(`${totalCaloriesExpended} calories`) + ' and consumed ' + chalk.redBright(`${user.info.eatingSchedule[i]} calories`) + ` resulting in no change to your weight`);
+              console.log(chalk.yellow(`${projectedDate.toLocaleDateString()}: `) + 'You expended ' + chalk.cyanBright(`${totalCaloriesExpended} calories`) + ' and consumed ' + chalk.redBright(`${user.info.eatingSchedule[i]} calories`) + ` resulting in no change to your weight`);
             }
           }
           projectedWeight -= totalCalorieDiff/weightloss.CALORIES_PER_POUND;
@@ -60,7 +60,10 @@ const projection = () => {
     }
 
     if(!planWorks){
-      console.log(chalk.red('Your weightloss plan results in weight being gained'));
+      const projectedDate = new Date();
+      projectedDate.setDate(projectedDate.getDate() + daysPassed);
+
+      console.log(chalk.red('Your weightloss plan results in weight being gained.' + `You would possibly be ${projectedWeight} lbs by ${projectedDate.toLocaleDateString()}`));
     }else{
       let averageWeeklyWeightLoss = 0;
       for(let i = 0; i < weightLostPerWeek.length; i++){
@@ -71,9 +74,11 @@ const projection = () => {
       
       let date = new Date();
       date.setDate(date.getDate() + daysPassed);
-      
-      console.log(chalk.blue(`will lose around ${averageWeeklyWeightLoss} lbs per week`))
-      console.log(chalk.blue(`You will reach ${user.info.goalWeight} lbs by ${date.toLocaleDateString()}`));
+      if(verbose == true){
+        console.log('\n')
+      }
+      console.log(chalk.cyanBright(`You will lose around ${averageWeeklyWeightLoss} lbs per week`))
+      console.log(chalk.cyanBright(`You will reach ${user.info.goalWeight} lbs by ${date.toLocaleDateString()}`));
     }
   })
 }
