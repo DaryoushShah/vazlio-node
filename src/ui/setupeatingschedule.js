@@ -6,6 +6,9 @@ import mainMenu from './mainmenu.js';
 const setupEatingSchedule = () => {
   /* Check if user data is NULL */
   console.log(`You burn around ${user.info.bmr} calories per day weighing ${user.info.weight}`);
+  if(user.info.eatingSchedule != null){
+    console.log(`Your current Eating Schedule is\n${user.info.eatingSchedule}`);
+  }
   inquirer
   .prompt([
     {

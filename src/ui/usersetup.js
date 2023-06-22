@@ -35,10 +35,10 @@ const userSetup = () => {
       choices: ['male', 'female']
     },
     {
-      name: 'risperidone',
-      message: 'Are you on Risperidone?',
+      name: 'medicine',
+      message: 'What medicine are you on?',
       type: 'list',
-      choices: ['yes', 'no']
+      choices: ['respiridone', 'caplyta']
     },
     {
       name: 'goalWeight',
@@ -54,10 +54,12 @@ const userSetup = () => {
     user.info.weight = Number(answers.weight);
     user.info.sex = answers.sex;
     user.info.goalWeight = Number(answers.goalWeight);
-    if(answers.risperidone == "yes"){
+    if(answers.medicine == "respiridone"){
       user.info.isOnRisperidone = true;
+      user.info.isOnCaplyta = false;
     }else{
       user.info.isOnRisperidone = false;
+      user.info.isOnCaplyta = true;
     }
 
     /* Calculate BMR */

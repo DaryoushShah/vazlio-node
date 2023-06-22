@@ -7,6 +7,7 @@ const user = (() => {
     sex: null,
     bmr: null,
     isOnRisperidone: null,
+    isOnCaplyta: null,
     goalWeight: null,
     eatingSchedule: [0, 0, 0, 0, 0, 0, 0],
     exerciseSchedule: [0, 0, 0, 0, 0, 0, 0],
@@ -21,6 +22,7 @@ const user = (() => {
       obj.sex === null ||
       obj.bmr === null ||
       obj.isOnRisperidone == null ||
+      obj.isOnCaplyta == null ||
       obj.goalWeight == null
     ){
       return false;
