@@ -79,25 +79,6 @@ const projection = () => {
       }
       console.log(chalk.cyanBright(`You will lose around ${averageWeeklyWeightLoss} lbs per week`))
       console.log(chalk.cyanBright(`You will reach ${user.info.goalWeight} lbs by ${date.toLocaleDateString()}`));
-
-      /* Calculate length of time */
-      /* Insert time in days, months, years */
-      const monthsInYear = 12;
-      const daysInMonth = 30; // assuming an average of 30 days in a month for simplicity
-      
-      // Calculate time in days, months, and years
-      const years = Math.floor(daysPassed / 365);
-      const months = Math.floor((daysPassed % 365) / daysInMonth);
-      const days = daysPassed % daysInMonth;
-      
-      // Display the time
-      if (years > 0) {
-        console.log(chalk.cyanBright(`It will take ${years} year(s), ${months} month(s), and ${days} day(s)`));
-      } else if (months > 0) {
-        console.log(chalk.cyanBright(`It will take ${months} month(s) and ${days} day(s)`));
-      } else {
-        console.log(chalk.cyanBright(`It will take ${days} day(s)`));
-      }
     }
   })
 }
