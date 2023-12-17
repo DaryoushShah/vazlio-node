@@ -79,6 +79,8 @@ const projection = () => {
       }
       console.log(chalk.cyanBright(`You will lose around ${averageWeeklyWeightLoss} lbs per week`))
       console.log(chalk.cyanBright(`You will reach ${user.info.goalWeight} lbs by ${date.toLocaleDateString()}`));
+      /* Tell how long the weightloss will take */
+      console.log(chalk.cyanBright(`It will take ${daysPassed/365} years to complete`));
     }
   })
 }
